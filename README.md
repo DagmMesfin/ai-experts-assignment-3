@@ -33,6 +33,29 @@ Update this README to include:
 - how to run the tests locally,
 - how to build and run tests with Docker.
 
+## Running Tests Locally
+
+1. **Create a virtual environment** (Python 3.11 recommended):
+ ```bash
+ python -m venv .venv
+ .venv\Scripts\activate  # PowerShell: .\.venv\Scripts\Activate.ps1
+ ```
+
+2. **Install dependencies**:
+ ```bash
+ pip install -r requirements.txt
+ ```
+
+3. **Execute the suite**:
+ ```bash
+ python -m pytest -v
+ ```
+
+## Running Tests With Docker
+
+1. Build the image: `docker build -t ai-experts .`.
+2. Run the container (tests execute automatically via the default CMD): `docker run --rm ai-experts`.
+
 ### 4) Find + fix a bug (required)
 
 There is a bug somewhere in this repository.
