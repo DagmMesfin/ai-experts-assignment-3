@@ -27,9 +27,12 @@ class Client:
             headers = {}
 
         if api:
-            if not self.oauth2_token or (
-                isinstance(self.oauth2_token, OAuth2Token) and self.oauth2_token.expired
-            ):
+            token = self.oauth2_token
+            if isinstance(token, dict):
+                token = OAuth2Token(**token)
+                self.oauth2_token = token
+
+            if not token or (isinstance(token, OAuth2Token) and token.expired):
                 self.refresh_oauth2()
 
             if isinstance(self.oauth2_token, OAuth2Token):
