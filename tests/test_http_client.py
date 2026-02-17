@@ -43,3 +43,13 @@ def test_api_request_refreshes_when_token_is_dict():
     resp = c.request("GET", "/me", api=True)
 
     assert resp["headers"].get("Authorization") == "Bearer fresh-token"
+
+
+def test_api_request_uses_dict_token_when_valid():
+    c = Client()
+    future_ts = int(time.time()) + 3600
+    c.oauth2_token = {"access_token": "dict-token", "expires_at": future_ts}
+
+    resp = c.request("GET", "/me", api=True)
+
+    assert resp["headers"].get("Authorization") == "Bearer dict-token"
